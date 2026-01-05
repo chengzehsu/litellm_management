@@ -1,44 +1,14 @@
-# Use Python 3.11 slim image for smaller size
-FROM python:3.11-slim
+# Use official LiteLLM Docker image with all dependencies included
+FROM ghcr.io/berriai/litellm-database:main-latest
 
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies if needed
-RUN apt-get update && apt-get install -y \
-    gcc \
-    postgresql-client \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+# Copy configuration file
+COPY config.yaml /app/config.yaml
 
-# Create non-root user for security
-RUN useradd -m -u 1000 litellm && \
-    chown -R litellm:litellm /app
+# Expose LiteLLM proxy port (Zeabur uses PORT env var, default to 8080)
+EXPOSE 8080
 
-# Copy requirements first for better caching
-COPY --chown=litellm:litellm requirements.txt .
-
-# Install Python dependencies as root (needed for system packages)
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy configuration files
-COPY --chown=litellm:litellm config.yaml .
-COPY --chown=litellm:litellm start.sh .
-
-# Make start script executable
-RUN chmod +x start.sh
-
-# Switch to non-root user
-USER litellm
-
-# Expose default LiteLLM proxy port
-EXPOSE 4000
-
-# Health check - LiteLLM proxy exposes /healthz endpoint
-# If it doesn't exist, we check if the service is responding
-HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-    CMD curl -f http://localhost:4000/healthz || \
-       curl -f http://localhost:4000/v1/models || exit 1
-
-# Start LiteLLM proxy
-CMD ["./start.sh"]
+# Start LiteLLM proxy with config
+CMD ["litellm", "--config", "/app/config.yaml", "--port", "8080", "--host", "0.0.0.0"]
