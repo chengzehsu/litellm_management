@@ -1,5 +1,5 @@
-# LiteLLM Core Package
-litellm>=1.40.0
+# LiteLLM Proxy Package (includes all proxy dependencies like backoff)
+litellm[proxy]>=1.40.0
 
 # Database drivers
 psycopg2-binary>=2.9.0
