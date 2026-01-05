@@ -1,0 +1,15 @@
+# LiteLLM Core Package
+litellm>=1.40.0
+
+# Database drivers (choose based on your database)
+# PostgreSQL
+psycopg2-binary>=2.9.0
+
+# SQLite (built-in with Python, but listed for clarity)
+# No package needed
+
+# Additional dependencies for Langfuse integration
+# These are typically included with litellm, but listed for completeness
+httpx>=0.24.0
+pydantic>=2.0.0
+
