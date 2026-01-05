@@ -26,6 +26,22 @@ litellm_settings:
 # Model List Configuration
 # Add your models here. Example configurations:
 model_list:
+  # Gemini Models (Google)
+  - model_name: gemini-pro
+    litellm_params:
+      model: gemini/gemini-pro
+      api_key: os.environ/GOOGLE_API_KEY
+
+  - model_name: gemini-1.5-pro
+    litellm_params:
+      model: gemini/gemini-1.5-pro
+      api_key: os.environ/GOOGLE_API_KEY
+
+  - model_name: gemini-1.5-flash
+    litellm_params:
+      model: gemini/gemini-1.5-flash
+      api_key: os.environ/GOOGLE_API_KEY
+
   # Example: OpenAI model
   # - model_name: gpt-4
   #   litellm_params:

@@ -64,22 +64,42 @@ LANGFUSE_SECRET_KEY=sk-your-langfuse-secret-key
 DISABLE_ADMIN_UI=True
 ```
 
-### 3. 配置模型（可選）
+### 3. 配置模型
 
-編輯 `config.yaml`，添加你要使用的模型：
+`config.yaml` 已經預配置了 Gemini 模型：
+- `gemini-pro` - Gemini Pro
+- `gemini-1.5-pro` - Gemini 1.5 Pro
+- `gemini-1.5-flash` - Gemini 1.5 Flash
+
+在 `.env` 中設置 Google API Key：
+
+```env
+GOOGLE_API_KEY=your-google-api-key-here
+```
+
+**獲取 Google API Key：**
+1. 前往 https://aistudio.google.com/app/apikey
+2. 登入你的 Google 帳號
+3. 創建新的 API Key
+4. 複製並設置到環境變數中
+
+**使用其他模型：**
+
+你也可以在 `config.yaml` 中添加其他模型：
 
 ```yaml
 model_list:
-  - model_name: gpt-4
+  # Gemini models (already configured)
+  - model_name: gemini-pro
     litellm_params:
-      model: gpt-4
-      api_key: os.environ/OPENAI_API_KEY
-```
+      model: gemini/gemini-pro
+      api_key: os.environ/GOOGLE_API_KEY
 
-然後在 `.env` 中添加對應的 API key：
-
-```env
-OPENAI_API_KEY=sk-your-openai-key
+  # Add other models as needed
+  # - model_name: gpt-4
+  #   litellm_params:
+  #     model: gpt-4
+  #     api_key: os.environ/OPENAI_API_KEY
 ```
 
 ### 4. 本地測試
