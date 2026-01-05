@@ -45,8 +45,9 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: postgresql://${POSTGRES_USER:-langfuse}:${POSTGRES_PASSWORD:-langfuse}@postgres:5432/${POSTGRES_DB:-langfuse}
-      CLICKHOUSE_URL: http://${CLICKHOUSE_USER:-langfuse}:${CLICKHOUSE_PASSWORD:-langfuse}@clickhouse:8123/${CLICKHOUSE_DB:-langfuse}
+      # Use environment variable if set (for Zeabur), otherwise use docker-compose service names
+      DATABASE_URL: ${DATABASE_URL:-postgresql://${POSTGRES_USER:-langfuse}:${POSTGRES_PASSWORD:-langfuse}@postgres:5432/${POSTGRES_DB:-langfuse}}
+      CLICKHOUSE_URL: ${CLICKHOUSE_URL:-http://${CLICKHOUSE_USER:-langfuse}:${CLICKHOUSE_PASSWORD:-langfuse}@clickhouse:8123/${CLICKHOUSE_DB:-langfuse}}
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-your-secret-key-change-this}
       NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
       SALT: ${SALT:-your-salt-change-this}
