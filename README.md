@@ -66,10 +66,21 @@ DISABLE_ADMIN_UI=True
 
 ### 3. 配置模型
 
-`config.yaml` 已經預配置了 Gemini 模型：
-- `gemini-pro` - Gemini Pro
-- `gemini-1.5-pro` - Gemini 1.5 Pro
-- `gemini-1.5-flash` - Gemini 1.5 Flash
+`config.yaml` 已經預配置了最新的 Gemini 模型：
+
+**Gemini 3 系列（最新世代）：**
+- `gemini-3-pro` - 進階推理、複雜程式碼與創作
+- `gemini-3-flash` - 預設模型，極速反應與多模態處理
+- `gemini-3-deep-think` - 強化邏輯推導模式
+
+**Gemini 2.5 系列（穩定生產版）：**
+- `gemini-2.5-pro` - 長上下文穩定版（1M-2M tokens）
+- `gemini-2.5-flash` - 高性價比工作馬
+- `gemini-2.5-flash-lite` - 極低延遲與大規模任務
+
+**特殊用途模型：**
+- `gemini-3-pro-image` - 專業級影像生成與分析
+- `gemini-live-3-flash` - 即時語音與串流對話
 
 在 `.env` 中設置 Google API Key：
 
@@ -83,23 +94,18 @@ GOOGLE_API_KEY=your-google-api-key-here
 3. 創建新的 API Key
 4. 複製並設置到環境變數中
 
-**使用其他模型：**
+**使用模型：**
 
-你也可以在 `config.yaml` 中添加其他模型：
+部署後，你可以通過 LiteLLM Proxy 使用任何已配置的 Gemini 模型：
 
-```yaml
-model_list:
-  # Gemini models (already configured)
-  - model_name: gemini-pro
-    litellm_params:
-      model: gemini/gemini-pro
-      api_key: os.environ/GOOGLE_API_KEY
-
-  # Add other models as needed
-  # - model_name: gpt-4
-  #   litellm_params:
-  #     model: gpt-4
-  #     api_key: os.environ/OPENAI_API_KEY
+```bash
+curl http://your-proxy-url/v1/chat/completions \
+  -H "Authorization: Bearer $LITELLM_MASTER_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gemini-3-flash",
+    "messages": [{"role": "user", "content": "Hello!"}]
+  }'
 ```
 
 ### 4. 本地測試
