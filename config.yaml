@@ -24,21 +24,12 @@ litellm_settings:
   # default_model: "gpt-3.5-turbo"
 
 # Model List Configuration
+# 參考: https://ai.google.dev/gemini-api/docs/pricing
 model_list:
-  # Gemini 3 系列 (最新世代)
-  - model_name: gemini-3-pro
+  # Gemini 3 系列 (預先發布版)
+  - model_name: gemini-3-pro-preview
     litellm_params:
-      model: gemini/gemini-3-pro
-      api_key: os.environ/GOOGLE_API_KEY
-
-  - model_name: gemini-3-flash
-    litellm_params:
-      model: gemini/gemini-3-flash
-      api_key: os.environ/GOOGLE_API_KEY
-
-  - model_name: gemini-3-deep-think
-    litellm_params:
-      model: gemini/gemini-3-deep-think
+      model: gemini/gemini-3-pro-preview
       api_key: os.environ/GOOGLE_API_KEY
 
   # Gemini 2.5 系列 (穩定生產版)
@@ -47,9 +38,19 @@ model_list:
       model: gemini/gemini-2.5-pro
       api_key: os.environ/GOOGLE_API_KEY
 
+  - model_name: gemini-2.5-pro-preview-05-06
+    litellm_params:
+      model: gemini/gemini-2.5-pro-preview-05-06
+      api_key: os.environ/GOOGLE_API_KEY
+
   - model_name: gemini-2.5-flash
     litellm_params:
       model: gemini/gemini-2.5-flash
+      api_key: os.environ/GOOGLE_API_KEY
+
+  - model_name: gemini-2.5-flash-preview-05-20
+    litellm_params:
+      model: gemini/gemini-2.5-flash-preview-05-20
       api_key: os.environ/GOOGLE_API_KEY
 
   - model_name: gemini-2.5-flash-lite
@@ -57,15 +58,31 @@ model_list:
       model: gemini/gemini-2.5-flash-lite
       api_key: os.environ/GOOGLE_API_KEY
 
-  # 特殊用途模型
-  - model_name: gemini-3-pro-image
+  - model_name: gemini-2.5-flash-lite-preview-06-17
     litellm_params:
-      model: gemini/gemini-3-pro-image
+      model: gemini/gemini-2.5-flash-lite-preview-06-17
       api_key: os.environ/GOOGLE_API_KEY
 
-  - model_name: gemini-live-3-flash
+  # Gemini 2.0 系列
+  - model_name: gemini-2.0-flash
     litellm_params:
-      model: gemini/gemini-live-3-flash
+      model: gemini/gemini-2.0-flash
+      api_key: os.environ/GOOGLE_API_KEY
+
+  - model_name: gemini-2.0-flash-lite
+    litellm_params:
+      model: gemini/gemini-2.0-flash-lite
+      api_key: os.environ/GOOGLE_API_KEY
+
+  # 舊版模型 (相容性)
+  - model_name: gemini-1.5-pro
+    litellm_params:
+      model: gemini/gemini-1.5-pro
+      api_key: os.environ/GOOGLE_API_KEY
+
+  - model_name: gemini-1.5-flash
+    litellm_params:
+      model: gemini/gemini-1.5-flash
       api_key: os.environ/GOOGLE_API_KEY
 
   # 其他模型範例（可選）
