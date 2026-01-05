@@ -1,6 +1,9 @@
 # LiteLLM Proxy Package (includes all proxy dependencies like backoff)
 litellm[proxy]>=1.40.0
 
+# Prisma for database ORM (required by LiteLLM proxy)
+prisma>=0.11.0
+
 # Database drivers
 psycopg2-binary>=2.9.0
 
