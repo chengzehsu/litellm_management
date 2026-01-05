@@ -1,0 +1,53 @@
+{
+  "$schema": "https://schema.zeabur.app/template.json",
+  "name": "Langfuse",
+  "description": "Langfuse - Open Source LLM Engineering Platform for traces, evals, prompt management and metrics",
+  "icon": "https://langfuse.com/favicon.ico",
+  "tags": ["llm", "observability", "langfuse", "monitoring"],
+  "readme": "langfuse/README.md",
+  "services": [
+    {
+      "name": "langfuse",
+      "icon": "https://langfuse.com/favicon.ico",
+      "template": "PREBUILT",
+      "source": {
+        "image": "langfuse/langfuse:latest"
+      },
+      "ports": [3000],
+      "env": {
+        "DATABASE_URL": {
+          "default": "",
+          "expose": true,
+          "required": true,
+          "description": "PostgreSQL connection string from Zeabur PostgreSQL service"
+        },
+        "NEXTAUTH_SECRET": {
+          "default": "",
+          "expose": true,
+          "required": true,
+          "description": "Random secret for authentication (use: openssl rand -base64 32)"
+        },
+        "NEXTAUTH_URL": {
+          "default": "",
+          "expose": true,
+          "required": true,
+          "description": "Public URL of Langfuse (e.g., https://langfuse-xxx.zeabur.app)"
+        },
+        "SALT": {
+          "default": "",
+          "expose": true,
+          "required": true,
+          "description": "Random salt for hashing (use: openssl rand -base64 32)"
+        },
+        "TELEMETRY_ENABLED": {
+          "default": "false",
+          "expose": true,
+          "required": false
+        }
+      },
+      "configs": [],
+      "volumes": []
+    }
+  ]
+}
+
