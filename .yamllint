@@ -1,0 +1,27 @@
+---
+extends: default
+
+rules:
+  # Allow longer lines for comments and URLs
+  line-length:
+    max: 100
+    level: warning
+
+  # Allow document start marker
+  document-start:
+    present: false
+
+  # Allow trailing spaces in comments (sometimes needed)
+  trailing-spaces:
+    level: warning
+
+  # Comments indentation
+  comments-indentation:
+    level: warning
+
+  # Empty lines
+  empty-lines:
+    max: 2
+    max-start: 1
+    max-end: 1
+

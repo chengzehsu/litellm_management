@@ -103,6 +103,7 @@ jobs:
         with:
           context: .
           push: false
+          load: true
           tags: litellm-proxy:test
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -131,7 +132,12 @@ jobs:
 
       - name: Lint YAML files
         run: |
-          yamllint config.yaml || true
+          # Use .yamllint config if it exists
+          if [ -f .yamllint ]; then
+            yamllint -c .yamllint config.yaml || true
+          else
+            yamllint config.yaml || true
+          fi
 
       - name: Check shell script syntax
         run: |

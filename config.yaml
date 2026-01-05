@@ -1,5 +1,7 @@
+---
 # LiteLLM Proxy Configuration
-# This configuration sets up LiteLLM as a data collector that sends traces to Langfuse
+# This configuration sets up LiteLLM as a data collector that sends
+# traces to Langfuse
 
 # General Settings
 general_settings:
@@ -10,14 +12,14 @@ general_settings:
 litellm_settings:
   # Enable Langfuse callback to send traces
   success_callback: ["langfuse"]
-  
+
   # Langfuse configuration
   langfuse_public_key: os.environ/LANGFUSE_PUBLIC_KEY
   langfuse_secret_key: os.environ/LANGFUSE_SECRET_KEY
-  
+
   # Optional: Set Langfuse host if using self-hosted instance
   # langfuse_host: os.environ/LANGFUSE_HOST
-  
+
   # Set default model if needed
   # default_model: "gpt-3.5-turbo"
 
@@ -29,7 +31,7 @@ model_list:
   #   litellm_params:
   #     model: gpt-4
   #     api_key: os.environ/OPENAI_API_KEY
-  
+
   # Example: Anthropic model
   # - model_name: claude-3-opus
   #   litellm_params:
@@ -44,4 +46,3 @@ model_list:
 # Logging Settings
 # logging:
 #   level: "INFO"
-
