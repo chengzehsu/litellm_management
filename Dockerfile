@@ -11,4 +11,5 @@ COPY config.yaml /app/config.yaml
 EXPOSE 8080
 
 # Start LiteLLM proxy with config
-CMD ["litellm", "--config", "/app/config.yaml", "--port", "8080", "--host", "0.0.0.0"]
+# Note: The base image already has litellm as ENTRYPOINT, so we only provide arguments
+CMD ["--config", "/app/config.yaml", "--port", "8080", "--host", "0.0.0.0"]
