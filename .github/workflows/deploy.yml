@@ -170,8 +170,8 @@ jobs:
             echo "✓ No .env files found in repository"
           fi
 
-  # Note: Zeabur will automatically deploy when code is pushed to main/master
-  # This workflow validates and tests the code before deployment
+  # Zeabur deployment will be triggered automatically after all checks pass
+  # Make sure you have connected the repository in Zeabur and enabled auto-deploy
   notify:
     name: Deployment Status
     runs-on: ubuntu-latest
@@ -183,6 +183,32 @@ jobs:
         run: |
           echo "✓ All checks passed!"
           echo "🚀 Code is ready for deployment to Zeabur"
-          echo "📦 Zeabur will automatically deploy this commit"
-          echo "🔗 Check your Zeabur dashboard for deployment status"
+          echo ""
+          echo "📋 Next steps:"
+          echo "1. Ensure repository is connected in Zeabur"
+          echo "2. Enable auto-deploy in Zeabur service settings"
+          echo "3. Zeabur will automatically deploy this commit"
+          echo ""
+          echo "🔗 Check deployment status:"
+          echo "   - Zeabur Dashboard: https://zeabur.com"
+          echo "   - GitHub Actions: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+      
+      - name: Deployment Summary
+        run: |
+          echo "## 🚀 Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ All validation checks passed!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch:** \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Author:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📦 Services to Deploy:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "1. **LiteLLM Proxy** (Root directory)" >> $GITHUB_STEP_SUMMARY
+          echo "2. **Langfuse** (langfuse/ directory)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 🔗 Links:" >> $GITHUB_STEP_SUMMARY
+          echo "- [Zeabur Dashboard](https://zeabur.com)" >> $GITHUB_STEP_SUMMARY
+          echo "- [Repository](https://github.com/${{ github.repository }})" >> $GITHUB_STEP_SUMMARY
 
